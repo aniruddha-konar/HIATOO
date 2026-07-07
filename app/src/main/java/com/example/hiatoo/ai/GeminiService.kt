@@ -36,7 +36,8 @@ class GeminiService(val apiKey: String) {
             response.text ?: "I am sorry Sir, I was unable to generate a response."
         } catch (e: Exception) {
             e.printStackTrace()
-            "I encountered an error connecting to my core processor, Sir."
+            val shortError = e.localizedMessage?.take(50) ?: "Unknown error"
+            "I encountered an error connecting to my core processor, Sir. ($shortError)"
         }
     }
 }

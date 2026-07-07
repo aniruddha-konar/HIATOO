@@ -20,19 +20,19 @@ class SettingsRepository(context: Context) {
     )
 
     fun saveGeminiApiKey(key: String) {
-        sharedPreferences.edit().putString("gemini_api_key", key).apply()
+        sharedPreferences.edit().putString("gemini_api_key", key.trim()).apply()
     }
 
     fun getGeminiApiKey(): String? {
-        return sharedPreferences.getString("gemini_api_key", null)
+        return sharedPreferences.getString("gemini_api_key", null)?.trim()
     }
 
     fun saveElevenLabsApiKey(key: String) {
-        sharedPreferences.edit().putString("elevenlabs_api_key", key).apply()
+        sharedPreferences.edit().putString("elevenlabs_api_key", key.trim()).apply()
     }
 
     fun getElevenLabsApiKey(): String? {
-        return sharedPreferences.getString("elevenlabs_api_key", null)
+        return sharedPreferences.getString("elevenlabs_api_key", null)?.trim()
     }
 
     fun saveVoiceId(id: String) {
