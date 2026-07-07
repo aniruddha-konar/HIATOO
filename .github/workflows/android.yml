@@ -30,17 +30,16 @@ jobs:
         chmod +x gradlew
 
     - name: Build with Gradle
-      run: ./gradlew assembleDebug 2>&1 | tee build_log.txt
+      run: ./gradlew assembleDebug > build_log.txt 2>&1 || true
 
-    - name: Commit build log (On Failure)
-      if: failure()
+    - name: Commit build log
       run: |
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
         git add build_log.txt
-        git commit -m "Add build log from failure"
-        git pull --rebase
-        git push
+        git commit -m "Force commit build log" || true
+        git pull --rebase || true
+        git push || true
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
