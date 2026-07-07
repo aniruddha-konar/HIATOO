@@ -19,20 +19,24 @@ class SettingsRepository(context: Context) {
         EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
     )
 
+    private fun sanitizeKey(key: String?): String? {
+        return key?.replace("\"", "")?.replace("'", "")?.replace(" ", "")?.trim()
+    }
+
     fun saveGeminiApiKey(key: String) {
-        sharedPreferences.edit().putString("gemini_api_key", key.trim()).apply()
+        sharedPreferences.edit().putString("gemini_api_key", sanitizeKey(key)).apply()
     }
 
     fun getGeminiApiKey(): String? {
-        return sharedPreferences.getString("gemini_api_key", null)?.trim()
+        return sanitizeKey(sharedPreferences.getString("gemini_api_key", null))
     }
 
     fun saveElevenLabsApiKey(key: String) {
-        sharedPreferences.edit().putString("elevenlabs_api_key", key.trim()).apply()
+        sharedPreferences.edit().putString("elevenlabs_api_key", sanitizeKey(key)).apply()
     }
 
     fun getElevenLabsApiKey(): String? {
-        return sharedPreferences.getString("elevenlabs_api_key", null)?.trim()
+        return sanitizeKey(sharedPreferences.getString("elevenlabs_api_key", null))
     }
 
     fun saveVoiceId(id: String) {
