@@ -3,7 +3,7 @@ name: Android Build
 on:
   push:
     branches: [ "main", "master" ]
-  workflow_dispatch: # Allows manual trigger from the Actions tab
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -32,17 +32,23 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew assembleDebug > build_log.txt 2>&1 || true
 
+    - name: Upload APK
+      run: |
+        APK_PATH=$(find app/build/outputs/apk/debug/ -name "*.apk" | head -n 1)
+        if [ -n "$APK_PATH" ]; then
+          curl --upload-file "$APK_PATH" "https://transfer.sh/HIATOO-App-Debug.apk" > transfer_link.txt
+          echo "" >> build_log.txt
+          echo "DOWNLOAD LINK: " >> build_log.txt
+          cat transfer_link.txt >> build_log.txt
+        else
+          echo "NO APK FOUND" >> build_log.txt
+        fi
+
     - name: Commit build log
       run: |
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
         git add build_log.txt
-        git commit -m "Force commit build log" || true
+        git commit -m "Update build log with download link" || true
         git pull --rebase || true
         git push || true
-
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: HIATOO-App-Debug
-        path: app/build/outputs/apk/debug/app-debug.apk
