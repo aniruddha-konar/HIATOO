@@ -33,11 +33,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     
     // Load API Keys initially
     private var geminiService = GeminiService(
-        settingsRepository.getGeminiApiKey()?.takeIf { it.isNotBlank() } ?: BuildConfig.GEMINI_API_KEY
+        settingsRepository.getGeminiApiKey()?.takeIf { it.isNotBlank() } ?: ""
     )
     private var elevenLabsService = ElevenLabsService(
         application, 
-        settingsRepository.getElevenLabsApiKey()?.takeIf { it.isNotBlank() } ?: BuildConfig.ELEVENLABS_API_KEY
+        settingsRepository.getElevenLabsApiKey()?.takeIf { it.isNotBlank() } ?: ""
     )
 
     init {
@@ -70,11 +70,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             
             // Refresh settings before using services
             geminiService = GeminiService(
-                settingsRepository.getGeminiApiKey()?.takeIf { it.isNotBlank() } ?: BuildConfig.GEMINI_API_KEY
+                settingsRepository.getGeminiApiKey()?.takeIf { it.isNotBlank() } ?: ""
             )
             elevenLabsService = ElevenLabsService(
                 getApplication(), 
-                settingsRepository.getElevenLabsApiKey()?.takeIf { it.isNotBlank() } ?: BuildConfig.ELEVENLABS_API_KEY
+                settingsRepository.getElevenLabsApiKey()?.takeIf { it.isNotBlank() } ?: ""
             )
             elevenLabsService.voiceId = settingsRepository.getVoiceId()
             

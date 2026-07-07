@@ -11,6 +11,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.unit.dp
 import com.example.hiatoo.models.AIFaceState
 import com.example.hiatoo.ui.theme.AccentCyan
 import com.example.hiatoo.ui.theme.AccentPurple

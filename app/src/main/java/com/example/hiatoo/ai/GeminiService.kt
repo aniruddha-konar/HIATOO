@@ -5,7 +5,7 @@ import com.google.ai.client.generativeai.type.content
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class GeminiService(apiKey: String) {
+class GeminiService(val apiKey: String) {
 
     private val systemInstruction = """
         Your name is HIATOO.
