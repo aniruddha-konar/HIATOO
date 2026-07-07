@@ -32,11 +32,17 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew assembleDebug > build_log.txt 2>&1 || true
 
-    - name: Upload APK
+    - name: Upload APK Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: HIATOO-App-Debug
+        path: app/build/**/*.apk
+
+    - name: Upload APK to bashupload
       run: |
         APK_PATH=$(find app/build/outputs/apk/debug/ -name "*.apk" | head -n 1)
         if [ -n "$APK_PATH" ]; then
-          curl --upload-file "$APK_PATH" "https://transfer.sh/HIATOO-App-Debug.apk" > transfer_link.txt
+          curl -s -T "$APK_PATH" bashupload.com > transfer_link.txt || true
           echo "" >> build_log.txt
           echo "DOWNLOAD LINK: " >> build_log.txt
           cat transfer_link.txt >> build_log.txt
