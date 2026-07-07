@@ -34,37 +34,30 @@ Starting a Gradle Daemon (subsequent builds will be faster)
 > Task :app:generateDebugAssets UP-TO-DATE
 > Task :app:mergeDebugAssets
 > Task :app:compressDebugAssets
-> Task :app:processDebugManifestForPackage
-> Task :app:processDebugResources
-> Task :app:checkDebugDuplicateClasses
 > Task :app:desugarDebugFileDependencies
+> Task :app:mergeDebugJniLibFolders
+> Task :app:checkDebugDuplicateClasses
+> Task :app:mergeDebugNativeLibs NO-SOURCE
+> Task :app:processDebugManifestForPackage
+> Task :app:mergeExtDexDebug
+> Task :app:stripDebugDebugSymbols NO-SOURCE
+> Task :app:mergeLibDexDebug
+> Task :app:validateSigningDebug
+> Task :app:writeDebugAppMetadata
+> Task :app:writeDebugSigningConfigVersions
+> Task :app:processDebugResources
+
 > Task :app:compileDebugKotlin
 w: file:///home/runner/work/HIATOO/HIATOO/app/src/main/java/com/example/hiatoo/ui/SettingsScreen.kt:50:49 'ArrowBack: ImageVector' is deprecated. Use the AutoMirrored version at Icons.AutoMirrored.Filled.ArrowBack
 
-> Task :app:mergeExtDexDebug
+> Task :app:compileDebugJavaWithJavac
+> Task :app:processDebugJavaRes
+> Task :app:dexBuilderDebug
+> Task :app:mergeProjectDexDebug
+> Task :app:mergeDebugJavaResource
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect
+> Task :app:assembleDebug
 
-> Task :app:compileDebugJavaWithJavac FAILED
-/home/runner/work/HIATOO/HIATOO/app/build/generated/source/buildConfig/debug/com/example/hiatoo/BuildConfig.java:13: error: text blocks are not supported in -source 8
-  public static final String ELEVENLABS_API_KEY = """";
-                                                  ^
-  (use -source 15 or higher to enable text blocks)
-/home/runner/work/HIATOO/HIATOO/app/build/generated/source/buildConfig/debug/com/example/hiatoo/BuildConfig.java:13: error: illegal text block open delimiter sequence, missing line terminator
-  public static final String ELEVENLABS_API_KEY = """";
-                                                     ^
-/home/runner/work/HIATOO/HIATOO/app/build/generated/source/buildConfig/debug/com/example/hiatoo/BuildConfig.java:15: error: illegal text block open delimiter sequence, missing line terminator
-  public static final String GEMINI_API_KEY = """";
-                                                 ^
-3 errors
-
-FAILURE: Build failed with an exception.
-
-* What went wrong:
-Execution failed for task ':app:compileDebugJavaWithJavac'.
-> Compilation failed; see the compiler error output for details.
-
-* Try:
-> Run with --info option to get more log output.
-> Run with --scan to get full insights.
-
-BUILD FAILED in 2m 44s
-23 actionable tasks: 23 executed
+BUILD SUCCESSFUL in 2m 59s
+34 actionable tasks: 34 executed
