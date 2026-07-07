@@ -38,24 +38,16 @@ jobs:
         name: HIATOO-App-Debug
         path: app/build/**/*.apk
 
-    - name: Upload APK to bashupload
+    - name: Commit APK to branch
       run: |
         APK_PATH=$(find app/build/outputs/apk/debug/ -name "*.apk" | head -n 1)
         if [ -n "$APK_PATH" ]; then
-          curl -s -T "$APK_PATH" bashupload.com > transfer_link.txt || true
-          echo "" >> build_log.txt
-          echo "DOWNLOAD LINK: " >> build_log.txt
-          cat transfer_link.txt >> build_log.txt
-        else
-          echo "NO APK FOUND" >> build_log.txt
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git checkout --orphan apk-release
+          git rm -rf .
+          cp "$APK_PATH" app-debug.apk
+          git add app-debug.apk
+          git commit -m "Update APK"
+          git push origin HEAD:apk-release -f
         fi
-
-    - name: Commit build log
-      if: always()
-      run: |
-        git config --global user.name "GitHub Actions"
-        git config --global user.email "actions@github.com"
-        git add build_log.txt
-        git commit -m "Update build log with download link" || true
-        git pull --rebase || true
-        git push || true
