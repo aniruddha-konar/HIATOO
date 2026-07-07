@@ -113,7 +113,7 @@ fun AIFace(
         // Draw Ripple if listening
         if (state == AIFaceState.LISTENING) {
             drawCircle(
-                color = AccentPurple.copy(alpha = 1f - (rippleRadius - 100f) / 80f),
+                color = AccentPurple.copy(alpha = (1f - (rippleRadius - 100f) / 80f).coerceIn(0f, 1f)),
                 radius = rippleRadius.dp.toPx(),
                 center = Offset(centerX, centerY),
                 style = Stroke(width = 4.dp.toPx())
